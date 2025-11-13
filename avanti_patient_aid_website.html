@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Avanti Patient Aid | Medical Bill Help Nonprofit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Avanti Patient Aid is a physician-backed nonprofit helping people reduce unaffordable medical bills through audits, negotiations, and clear guidance." />
+
+  <style>
+    :root {
+      --bg-body: #050509;
+      --bg-card: #0a0b10;
+      --line-soft: #272730;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent: #f4c15d;
+      --primary: #f9fafb;
+      --radius-xl: 32px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-soft: 0 26px 90px rgba(0, 0, 0, 0.9);
+      --max-width: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at top, #101118 0, #050509 55%, #020108 100%),
+        linear-gradient(135deg, #050509, #101118);
+      background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    /* SHELL */
+
+    .page-shell {
+      min-height: 100vh;
+      padding: 2rem 1.25rem 3.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: var(--max-width);
+      background: radial-gradient(circle at top left, rgba(36, 40, 58, 0.7), rgba(10, 11, 16, 0.98));
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(63, 63, 80, 0.85);
+      box-shadow: var(--shadow-soft);
+      padding: 2.1rem 1.7rem 2.7rem;
+      backdrop-filter: blur(26px);
+    }
+
+    @media (min-width: 960px) {
+      .page {
+        padding: 2.7rem 2.6rem 3.2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-shell {
+        padding: 0;
+      }
+      .page {
+        border-radius: 0;
+        box-shadow: none;
+        border-left: none;
+        border-right: none;
+      }
+    }
+
+    /* HEADER */
+
+    header.nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid rgba(63, 63, 80, 0.9);
+      margin-bottom: 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(82, 82, 102, 0.9);
+      padding: 4px;
+      background:
+        radial-gradient(circle at 0 0, #1f2937 0, #020617 45%, #000000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.12rem;
+    }
+
+    .brand-text strong {
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .nav-links a {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a + a {
+      margin-left: 1.4rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .lang-pill {
+      font-size: 0.78rem;
+      border-radius: 999px;
+      border: 1px solid rgba(63, 63, 80, 1);
+      padding: 0.3rem 0.85rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(24, 24, 35, 0.95);
+    }
+
+    .lang-pill button {
+      border: none;
+      background: none;
+      padding: 0;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      opacity: 0.55;
+    }
+
+    .lang-pill button.active {
+      opacity: 1;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      border: none;
+      padding: 0.6rem 1.3rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      background: var(--accent);
+      color: #111827;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .btn-primary span.icon {
+      font-size: 0.95rem;
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      border: 1px solid rgba(63, 63, 80, 1);
+      padding: 0.55rem 1.1rem;
+      font-size: 0.8rem;
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .btn-ghost.secondary {
+      color: var(--text-muted);
+      background: transparent;
+    }
+
+    .btn-ghost:hover,
+    .btn-primary:hover {
+      filter: brightness(1.08);
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      gap: 2.3rem;
+      margin-bottom: 2.7rem;
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.3fr);
+        align-items: center;
+      }
+    }
+
+    .hero-main {
+      max-width: 640px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      line-height: 1.18;
+      margin: 0 0 0.75rem;
+    }
+
+    .hero-title span {
+      border-bottom: 1px solid rgba(75, 85, 99, 0.85);
+      padding-bottom: 0.18rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 34rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-meta {
+      display: grid;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .meta-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .hero-panel {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(31, 41, 55, 0.7), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(63, 63, 80, 0.9);
+      padding: 1.4rem 1.5rem;
+    }
+
+    .hero-panel-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.3rem 0.85rem;
+    }
+
+    .step-number {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(82, 82, 102, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--text-main);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .step-title {
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .step-desc {
+      grid-column: 2 / -1;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .hero-note {
+      margin-top: 1.2rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid rgba(63, 63, 80, 0.9);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .hero-note a {
+      color: var(--accent);
+    }
+
+    .hero-note strong {
+      font-weight: 600;
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding-top: 2.2rem;
+      margin-top: 2.2rem;
+      border-top: 1px solid rgba(63, 63, 80, 0.9);
+    }
+
+    .section-heading {
+      margin-bottom: 1.4rem;
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      margin: 0 0 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 36rem;
+    }
+
+    .columns-2 {
+      display: grid;
+      gap: 1.8rem;
+    }
+
+    @media (min-width: 860px) {
+      .columns-2 {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.05fr);
+      }
+    }
+
+    /* WHAT WE DO */
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.9rem;
+    }
+
+    .pill {
+      font-size: 0.78rem;
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(63, 63, 80, 0.9);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-muted);
+    }
+
+    .soft-card {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(63, 63, 80, 0.9);
+      background: rgba(10, 13, 24, 0.98);
+      padding: 1.1rem 1.2rem;
+      font-size: 0.86rem;
+    }
+
+    .soft-card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .soft-card ul {
+      margin: 0.3rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+    }
+
+    /* CASES */
+
+    .case-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 900px) {
+      .case-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .case {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(63, 63, 80, 0.9);
+      background: radial-gradient(circle at top left, rgba(31, 41, 55, 0.6), rgba(15, 23, 42, 0.96));
+      padding: 1rem 1rem;
+      font-size: 0.84rem;
+    }
+
+    .case small {
+      display: block;
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.25rem;
+    }
+
+    .case h3 {
+      margin: 0 0 0.35rem;
+      font-size: 0.92rem;
+    }
+
+    .case .result {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    /* TRUST */
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+    }
+
+    .tag {
+      padding: 0.26rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(63, 63, 80, 0.9);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-muted);
+    }
+
+    /* PRICING */
+
+    .pricing-panel {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(63, 63, 80, 0.9);
+      background: rgba(10, 13, 24, 0.98);
+      padding: 1.15rem 1.25rem;
+      font-size: 0.86rem;
+    }
+
+    .pricing-labels {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 0.5rem 0 0.65rem;
+    }
+
+    .pricing-label {
+      font-size: 0.76rem;
+      padding: 0.26rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(252, 211, 77, 0.9);
+      background: rgba(254, 243, 199, 0.06);
+      color: var(--accent);
+    }
+
+    .pricing-panel ul {
+      margin: 0.25rem 0 0.5rem;
+      padding-left: 1.1rem;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+    }
+
+    /* FORMS */
+
+    .form-card {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(63, 63, 80, 0.9);
+      background: rgba(10, 13, 24, 0.98);
+      padding: 1.2rem 1.25rem 1.3rem;
+      font-size: 0.86rem;
+    }
+
+    .form-card h3 {
+      margin: 0 0 0.45rem;
+      font-size: 0.96rem;
+    }
+
+    .form-card p.lead {
+      margin: 0 0 0.75rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .field {
+      margin-bottom: 0.75rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
+
+    .field small {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border-radius: 11px;
+      border: 1px solid rgba(75, 85, 99, 1);
+      padding: 0.48rem 0.65rem;
+      font: inherit;
+      font-size: 0.84rem;
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-main);
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(148, 163, 184, 0.7);
+    }
+
+    .field textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      margin-top: 0.7rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .form-footnote {
+      margin-top: 0.6rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* FAQ */
+
+    .faq-list {
+      display: grid;
+      gap: 0.8rem;
+      font-size: 0.84rem;
+    }
+
+    .faq-item {
+      border-radius: 12px;
+      border: 1px solid rgba(63, 63, 80, 0.9);
+      background: rgba(10, 13, 24, 0.98);
+      padding: 0.75rem 0.9rem;
+    }
+
+    .faq-item summary {
+      list-style: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item p {
+      margin: 0.45rem 0 0;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* FOOTER */
+
+    footer {
+      margin-top: 2.6rem;
+      padding-top: 1.3rem;
+      border-top: 1px solid rgba(63, 63, 80, 0.9);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.7rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 0.16em;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @media (min-width: 820px) {
+      .nav-links {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="page">
+      <!-- NAV -->
+      <header class="nav">
+        <div class="brand">
+          <div class="brand-mark">
+            <!-- change avanti-logo.png if needed -->
+            <img src="avanti-logo.png" alt="Avanti Patient Aid logo" />
+          </div>
+          <div class="brand-text">
+            <strong>Avanti Patient Aid</strong>
+            <span>Physician-backed medical bill support</span>
+          </div>
+        </div>
+        <div class="nav-right">
+          <nav class="nav-links">
+            <a href="#how-it-works">How it works</a>
+            <a href="#services">Services</a>
+            <a href="#stories">Outcomes</a>
+            <a href="#trust">Who we are</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+          <div class="lang-pill" aria-label="Language selector">
+            <span>Language</span>
+            <button type="button" class="active" data-lang="en">EN</button>
+            <span>/</span>
+            <button type="button" data-lang="es">ES</button>
+          </div>
+          <a href="#get-help" class="btn-primary">
+            <span>Get help</span>
+            <span class="icon">→</span>
+          </a>
+        </div>
+      </header>
+
+      <main>
+        <!-- HERO -->
+        <section class="hero" id="top">
+          <div class="hero-main">
+            <div class="hero-eyebrow">Southern California · Nonprofit medical bill help</div>
+            <h1 class="hero-title">
+              Medical bills shouldn’t
+              <span>own your future.</span>
+            </h1>
+            <p class="hero-subtitle">
+              Avanti Patient Aid is a physician-backed nonprofit that audits your bill for mistakes, explains every line
+              in plain language, and walks you through real options before collections or wage garnishment hit.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#get-help" class="btn-primary">
+                <span>Start free review</span>
+                <span class="icon">↗</span>
+              </a>
+              <a href="#refer" class="btn-ghost">
+                <span>Refer a patient</span>
+              </a>
+              <a href="#donate" class="btn-ghost secondary">
+                <span>Donate</span>
+              </a>
+            </div>
+
+            <div class="hero-meta">
+              <div class="hero-meta-row">
+                <span class="meta-dot"></span>
+                <span>Privacy-first intake with written consent before we contact any hospital or clinic.</span>
+              </div>
+              <div class="hero-meta-row">
+                <span class="meta-dot"></span>
+                <span>Typical timeline: 2–3 business days for intake, 5–10 business days for full review.</span>
+              </div>
+              <div class="hero-meta-row">
+                <span class="meta-dot"></span>
+                <span>Serving Southern California in person, supporting patients statewide remotely.</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-panel" aria-label="Three-step case flow">
+            <div class="hero-panel-title">Three steps</div>
+            <div class="steps">
+              <div class="step">
+                <div class="step-number">1</div>
+                <div>
+                  <div class="step-title">Share your bill & story</div>
+                  <div class="step-desc">
+                    Send us your bill, insurance explanation of benefits (EOB), and a short note about what happened
+                    and why the balance feels impossible.
+                  </div>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step-number">2</div>
+                <div>
+                  <div class="step-title">We review with physicians</div>
+                  <div class="step-desc">
+                    Our billing team and physician board audit charges, codes, and policies to spot errors, discounts,
+                    and charity-care options.
+                  </div>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step-number">3</div>
+                <div>
+                  <div class="step-title">You get a clear action plan</div>
+                  <div class="step-desc">
+                    You receive a plain-language action plan. With your consent, we contact the hospital or clinic with
+                    you and help you follow through.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-note">
+              <span>
+                For patients: <strong>no-cost review</strong>. Ongoing support is funded by donations & grants.
+              </span>
+              <a href="#pricing">How funding works →</a>
+            </div>
+          </aside>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section id="how-it-works">
+          <div class="section-heading">
+            <div class="section-kicker">How it works</div>
+            <h2 class="section-title">What we actually do with your bill</h2>
+            <p class="section-subtitle">
+              We look at your bill like a friendly insider: checking charges, codes, and rules, then translating it into
+              normal language so you know what’s wrong, what’s fair, and what can change.
+            </p>
+          </div>
+
+          <div class="columns-2">
+            <div>
+              <p style="font-size:0.86rem;color:var(--text-muted);max-width:32rem;margin:0;">
+                We slow things down and separate three questions:
+                What does the bill say? What should it say? And what options do you have right now to change the
+                outcome?
+              </p>
+              <div class="pill-row">
+                <div class="pill">Hospital & ER stays</div>
+                <div class="pill">Clinic & surgery centers</div>
+                <div class="pill">Imaging & labs</div>
+                <div class="pill">Insurance EOBs</div>
+              </div>
+            </div>
+
+            <div class="soft-card">
+              <h3>During a review, we will:</h3>
+              <ul>
+                <li>Check for duplicate or incorrect charges and mismatched levels of care.</li>
+                <li>Confirm how insurance processed (or mis-processed) the claim.</li>
+                <li>Compare prices with public or policy-based rates when possible.</li>
+                <li>Map out options: charity-care, payment plans, appeals, and corrections.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERVICES + STORIES -->
+        <section id="services">
+          <div class="columns-2">
+            <div>
+              <div class="section-heading">
+                <div class="section-kicker">Who we help</div>
+                <h2 class="section-title">Patients, families & the teams who support them</h2>
+              </div>
+
+              <div class="soft-card" style="margin-bottom:1.2rem;">
+                <h3>For patients & families</h3>
+                <ul>
+                  <li>Audit hospital, ER, and clinic bills for errors and overcharging.</li>
+                  <li>Review surprise out-of-network or “self-pay” pricing.</li>
+                  <li>Guide you through charity-care, appeals, and payment plans.</li>
+                  <li>Coach you on calls and letters with billing offices.</li>
+                </ul>
+              </div>
+
+              <div class="soft-card">
+                <h3>For clinics & social workers</h3>
+                <ul>
+                  <li>Simple referral pathway with clear expectations and timelines.</li>
+                  <li>Warm handoffs for patients with unaffordable medical debt.</li>
+                  <li>Plain-language handouts for waiting rooms and discharge packets.</li>
+                  <li>Workshops on “how to talk about bills” without shame or fear.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="stories">
+              <div class="section-heading">
+                <div class="section-kicker">Outcomes</div>
+                <h2 class="section-title">What this looks like in real life</h2>
+              </div>
+
+              <div class="case-grid">
+                <article class="case">
+                  <small>Inland Empire · Anonymized</small>
+                  <h3>ER visit after a car accident</h3>
+                  <div class="result">Bill reduced: $18,400 → $2,900</div>
+                  <p>
+                    We found duplicate imaging charges and an ER level that did not match the record. After an appeal and
+                    charity-care review, the hospital adjusted the balance and created a 0% interest plan.
+                  </p>
+                </article>
+
+                <article class="case">
+                  <small>Los Angeles · Anonymized</small>
+                  <h3>Uninsured clinic surgery</h3>
+                  <div class="result">New price tied to Medicare rates</div>
+                  <p>
+                    A “self-pay” quote was more than 600% of Medicare. Using public rate data, we helped the patient ask
+                    for a lower, policy-consistent amount and a longer timeline.
+                  </p>
+                </article>
+
+                <article class="case">
+                  <small>Remote · Anonymized</small>
+                  <h3>Unexpected lab bill</h3>
+                  <div class="result">Collections paused, claim corrected</div>
+                  <p>
+                    A lab used an old insurance card. We guided the patient through a corrected submission, which pulled
+                    the account back from collections and brought the bill in network.
+                  </p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TRUST -->
+        <section id="trust">
+          <div class="columns-2">
+            <div>
+              <div class="section-heading">
+                <div class="section-kicker">Trust & oversight</div>
+                <h2 class="section-title">Physician-backed. Community-grounded.</h2>
+                <p class="section-subtitle">
+                  Our physician advisory board keeps our recommendations clinically honest. Our community partners keep us
+                  rooted in what patients actually face at the front desk and in the billing office.
+                </p>
+              </div>
+
+              <div class="soft-card">
+                <h3>Physician advisory board</h3>
+                <p style="font-size:0.84rem;color:var(--text-muted);margin-top:0.3rem;">
+                  Practicing physicians review our education materials and help flag when a bill does not match the care
+                  that was actually delivered.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">Emergency medicine</span>
+                  <span class="tag">Hospital medicine</span>
+                  <span class="tag">Primary care</span>
+                  <span class="tag">Health policy</span>
+                </div>
+                <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.7rem;">
+                  Board biographies and conflict-of-interest statements are available for funders and partners on request.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div class="soft-card">
+                <h3>Clinic & community partners</h3>
+                <p style="font-size:0.84rem;color:var(--text-muted);margin-top:0.3rem;">
+                  We work with clinics, social workers, and community groups to catch patients early in the billing cycle,
+                  while there is still room to move.
+                </p>
+                <ul style="margin-top:0.4rem;padding-left:1.1rem;color:var(--text-muted);font-size:0.84rem;">
+                  <li>Standard referral form with clear consent language.</li>
+                  <li>Status updates without clinical details or identifiers.</li>
+                  <li>Quarterly outcome summaries for your own reporting.</li>
+                </ul>
+                <p style="margin-top:0.8rem;font-size:0.84rem;">
+                  Interested in partnering? <a href="#refer">Start with a quick referral →</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PRICING -->
+        <section id="pricing">
+          <div class="section-heading">
+            <div class="section-kicker">Pricing & funding</div>
+            <h2 class="section-title">No surprise support. Ever.</h2>
+            <p class="section-subtitle">
+              We are a nonprofit. We do not buy your debt, take a percentage of “savings,” or charge hidden fees.
+              Everything we do for you is explained in writing first.
+            </p>
+          </div>
+
+          <div class="columns-2">
+            <div class="pricing-panel">
+              <h3>For patients</h3>
+              <div class="pricing-labels">
+                <span class="pricing-label">Free intake</span>
+                <span class="pricing-label">Free review</span>
+                <span class="pricing-label">No % of savings</span>
+              </div>
+              <ul>
+                <li>Intake, document check, and written summary: <strong>$0</strong>.</li>
+                <li>Most cases are fully covered by donations and grants.</li>
+                <li>
+                  In some cases we may invite an optional, fixed support contribution (never a percentage). You will
+                  always see this in writing before you decide.
+                </li>
+              </ul>
+              <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">
+                We never sell your data and we do not get paid by hospitals or collectors for sending patients their way.
+              </p>
+            </div>
+
+            <div class="pricing-panel" id="donate">
+              <h3>For donors & funders</h3>
+              <p style="font-size:0.84rem;color:var(--text-muted);">
+                Your support keeps reviews free at the moment they matter most and lets us publish open guides that
+                anyone can use.
+              </p>
+              <ul>
+                <li>Direct service: case reviews, negotiation support, and follow-up.</li>
+                <li>Education: public resources, templates, and community workshops.</li>
+                <li>Infrastructure: secure intake, consent tracking, and data protection.</li>
+              </ul>
+              <p style="font-size:0.84rem;margin-top:0.5rem;">
+                To talk about grants or recurring support, email
+                <a href="mailto:hello@avantipatientaid.org">hello@avantipatientaid.org</a>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- GET HELP + REFER -->
+        <section id="get-help">
+          <div class="columns-2">
+            <div>
+              <div class="section-heading">
+                <div class="section-kicker">Start here</div>
+                <h2 class="section-title">Send us your bill in a few minutes</h2>
+                <p class="section-subtitle">
+                  Tell us what happened and roughly how much you were billed. We’ll reply with a secure link for document
+                  upload and electronic consent.
+                </p>
+              </div>
+
+              <div class="form-card">
+                <!-- Replace action="#" with your real endpoint or Cloudflare Worker -->
+                <form action="#" method="post">
+                  <div class="field">
+                    <label for="name">Full name</label>
+                    <input id="name" name="name" type="text" autocomplete="name" required />
+                  </div>
+
+                  <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required />
+                  </div>
+
+                  <div class="field">
+                    <label for="state">State</label>
+                    <select id="state" name="state" required>
+                      <option value="">Select state…</option>
+                      <option value="CA">California</option>
+                      <option value="other">Other U.S. state</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="amount">Approximate bill amount</label>
+                    <select id="amount" name="amount" required>
+                      <option value="">Choose one…</option>
+                      <option value="lt1k">Under $1,000</option>
+                      <option value="1-5k">$1,000 – $5,000</option>
+                      <option value="5-20k">$5,000 – $20,000</option>
+                      <option value="gt20k">Over $20,000</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="story">What happened?</label>
+                    <small>2–3 sentences about your visit and why the bill feels wrong or impossible.</small>
+                    <textarea id="story" name="story" required></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="submit" class="btn-primary">
+                      <span>Submit</span>
+                      <span class="icon">↗</span>
+                    </button>
+                    <p>We usually respond within <strong>2–3 business days</strong>.</p>
+                  </div>
+                </form>
+
+                <div class="form-footnote">
+                  If the bill is already in collections or you have a legal deadline, mention the exact date in your note
+                  so we can triage your case.
+                </div>
+              </div>
+            </div>
+
+            <div id="refer">
+              <div class="section-heading">
+                <div class="section-kicker">Referrals & contact</div>
+                <h2 class="section-title">For clinics, social workers & partners</h2>
+              </div>
+
+              <div class="form-card">
+                <h3>Refer a patient</h3>
+                <p class="lead">
+                  Please confirm your patient knows you are sharing their details and is open to hearing from us.
+                </p>
+                <form action="#" method="post">
+                  <div class="field">
+                    <label for="referrer-name">Your name & role</label>
+                    <input id="referrer-name" name="referrer_name" type="text" required />
+                  </div>
+
+                  <div class="field">
+                    <label for="org">Organization</label>
+                    <input id="org" name="organization" type="text" />
+                  </div>
+
+                  <div class="field">
+                    <label for="patient-first">Patient first name only</label>
+                    <small>No MRNs or last names here. We’ll use secure channels after consent.</small>
+                    <input id="patient-first" name="patient_first" type="text" required />
+                  </div>
+
+                  <div class="field">
+                    <label for="contact-method">Best way to reach the patient</label>
+                    <input id="contact-method" name="contact_method" type="text" placeholder="e.g., mobile + text, email only" required />
+                  </div>
+
+                  <div class="field">
+                    <label for="deadline">Any urgent dates?</label>
+                    <textarea id="deadline" name="deadline" placeholder="Example: Sent to collections but still within 30 days."></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button type="submit" class="btn-ghost">
+                      <span>Send referral</span>
+                    </button>
+                    <p>We aim to contact referred patients within <strong>2 business days</strong>.</p>
+                  </div>
+                </form>
+              </div>
+
+              <div class="pricing-panel" id="contact" style="margin-top:1.1rem;">
+                <h3>General contact</h3>
+                <p style="font-size:0.84rem;color:var(--text-muted);margin-top:0.35rem;">
+                  For partnership, press, or funding questions, email
+                  <a href="mailto:hello@avantipatientaid.org">hello@avantipatientaid.org</a>.
+                  We usually respond within 3–5 business days.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+          <div class="section-heading">
+            <div class="section-kicker">Questions</div>
+            <h2 class="section-title">Frequently asked</h2>
+          </div>
+
+          <div class="faq-list">
+            <details class="faq-item" open>
+              <summary>Are you a law firm or a debt settlement company?</summary>
+              <p>
+                No. We are a nonprofit focused on education, navigation, and negotiation support. We do not provide legal
+                advice, buy your debt, or get paid by collections agencies.
+              </p>
+            </details>
+
+            
+
+            <details class="faq-item">
+              <summary>What do I need to provide to start?</summary>
+              <p>
+                At minimum: your itemized bill, any insurance EOBs, and a short description of what happened. After this
+                form, we will send a secure link for uploads and electronic consent.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Can you help if I live outside California?</summary>
+              <p>
+                Our first priority is California patients, especially in Southern California. We may still be able to
+                offer general guidance or educational resources if you live in another state.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>How long does the process usually take?</summary>
+              <p>
+                Intake review usually takes 2–3 business days. A full audit and written plan usually takes 5–10 business
+                days. Complex cases with multiple providers or appeals can take longer; we will set expectations clearly.
+              </p>
+            </details>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div>
+          © <span id="year"></span> Avanti Patient Aid. All rights reserved.
+        </div>
+        <div>
+          <a href="#top">Back to top</a> ·
+          <a href="#pricing">Funding & transparency</a> ·
+          <a href="#contact">Contact</a>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Smooth scroll for in-page links
+    document.addEventListener("click", function (e) {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      const href = link.getAttribute("href");
+      if (!href || href.length <= 1) return;
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
+    });
+
+    // Set current year
+    const yearEl = document.getElementById("year");
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+
+    // Language toggle (bilingual-ready – content is EN for now)
+    const langButtons = document.querySelectorAll("[data-lang]");
+    langButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        langButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const lang = btn.getAttribute("data-lang");
+        if (lang) document.documentElement.lang = lang;
+        // Later you can hook this to swap text when you add Spanish.
+      });
+    });
+  </script>
+</body>
+</html>
